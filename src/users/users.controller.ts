@@ -12,9 +12,9 @@ export class UsersController {
   }
 
   @Post('/')
-  async generateUsers(amountForGenerating: number = 1): Promise<any> {
+  async generateUsers(amountForGenerating = 1): Promise<any> {
     const promises = [];
-    for (let i = 0; i < amountForGenerating; i++ ) {
+    for (let i = 0; i < amountForGenerating; i++) {
       promises.push(this.usersService.createOne());
     }
     return Promise.all(promises);

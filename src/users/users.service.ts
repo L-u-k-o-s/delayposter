@@ -8,19 +8,18 @@ export class UsersService {
   constructor(
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
-    private connection: Connection
-  ) {
-  }
+    private connection: Connection,
+  ) {}
 
   async createOne(): Promise<any> {
-    // const user = new Users(record);
-    return this.connection.createQueryBuilder()
+    return this.connection
+      .createQueryBuilder()
       .insert()
       .into(Users)
       .values({
         first_name: `${Math.random()}`,
         last_name: 'ssdfsfsdf',
-        email: 'ab@mail.com'
+        email: 'ab@mail.com',
       })
       .execute();
   }
@@ -36,5 +35,4 @@ export class UsersService {
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
-
 }
