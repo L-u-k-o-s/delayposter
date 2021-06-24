@@ -1,4 +1,40 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Connection, Repository } from 'typeorm';
+import { Users } from './users.model';
 
 @Injectable()
-export class UsersService {}
+export class UsersService {
+  constructor(
+    @InjectRepository(Users)
+    private usersRepository: Repository<Users>,
+    private connection: Connection
+  ) {
+  }
+
+  async createOne(): Promise<any> {
+    // const user = new Users(record);
+    return this.connection.createQueryBuilder()
+      .insert()
+      .into(Users)
+      .values({
+        first_name: `${Math.random()}`,
+        last_name: 'ssdfsfsdf',
+        email: 'ab@mail.com'
+      })
+      .execute();
+  }
+
+  findAll(): Promise<Users[]> {
+    return this.usersRepository.find();
+  }
+
+  findOne(id: number): Promise<Users> {
+    return this.usersRepository.findOne(id);
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.usersRepository.delete(id);
+  }
+
+}
