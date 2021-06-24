@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Users } from './users.model';
 
 @Injectable()
@@ -8,13 +8,11 @@ export class UsersService {
   constructor(
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
-    private connection: Connection,
   ) {
   }
 
   async createOne(): Promise<Users> {
-    return this.connection
-      .getRepository(Users)
+    return this.usersRepository
       .save({
         first_name: `${Math.random()}`,
         last_name: 'ssdfsfsdf',
