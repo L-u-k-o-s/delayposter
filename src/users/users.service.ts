@@ -8,21 +8,18 @@ export class UsersService {
   constructor(
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
-    private connection: Connection
+    private connection: Connection,
   ) {
   }
 
-  async createOne(): Promise<any> {
-    // const user = new Users(record);
-    return this.connection.createQueryBuilder()
-      .insert()
-      .into(Users)
-      .values({
+  async createOne(): Promise<Users> {
+    return this.connection
+      .getRepository(Users)
+      .save({
         first_name: `${Math.random()}`,
         last_name: 'ssdfsfsdf',
-        email: 'ab@mail.com'
-      })
-      .execute();
+        email: 'ab@mail.com',
+      });
   }
 
   findAll(): Promise<Users[]> {
