@@ -1,6 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
-// import { Users } from './users.model';
 import { UsersService } from './users.service';
+import { Users } from './users.model';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +12,7 @@ export class UsersController {
   }
 
   @Post('/')
-  async generateUsers(amountForGenerating = 1): Promise<any> {
+  async generateUsers(amountForGenerating = 1): Promise<Users[]> {
     const promises = [];
     for (let i = 0; i < amountForGenerating; i++) {
       promises.push(this.usersService.createOne());
