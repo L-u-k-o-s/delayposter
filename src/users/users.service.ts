@@ -10,11 +10,11 @@ export class UsersService {
     private usersRepository: Repository<Users>,
   ) {}
 
-  async createOne(): Promise<Users> {
+  async createOne({ firstName, lastName, email }): Promise<Users> {
     return this.usersRepository.save({
-      first_name: `${Math.random()}`,
-      last_name: 'ssdfsfsdf',
-      email: 'ab@mail.com',
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
     });
   }
 
@@ -26,7 +26,9 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<boolean> {
     await this.usersRepository.delete(id);
+
+    return true;
   }
 }
