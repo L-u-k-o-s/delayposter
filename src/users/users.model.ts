@@ -29,4 +29,18 @@ export class Users {
   @Column({ default: true })
   @Field()
   is_active: boolean;
+
+  @ApiProperty()
+  @Column({
+    nullable: true,
+  })
+  @Field()
+  password: string;
+
+  @ApiProperty()
+  @Column({
+    nullable: true,
+  })
+  @Field()
+  username: string;
 }
