@@ -22,7 +22,7 @@ export class UsersController {
   async generateUsers(amountForGenerating: number = 1): Promise<Users[]> {
     const promises = [];
     for (let i = 0; i < amountForGenerating; i++) {
-      promises.push(this.usersService.createOne());
+      promises.push(this.usersService.createOne({}));
     }
     return Promise.all(promises);
   }

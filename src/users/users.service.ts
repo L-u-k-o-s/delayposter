@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './users.model';
+import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 
 @Injectable()
 export class UsersService {
@@ -11,21 +12,12 @@ export class UsersService {
   ) {
   }
 
-  async createOne(): Promise<Users> {
-    return this.usersRepository
-      .save({
-        first_name: `${Math.random()}`,
-        last_name: 'ssdfsfsdf',
-        email: 'ab@mail.com',
-      });
+  async createOne(user: object): Promise<Users> {
+    return this.usersRepository.save(user);
   }
 
   findAll(): Promise<Users[]> {
     return this.usersRepository.find();
-  }
-
-  findOne(id: number): Promise<Users> {
-    return this.usersRepository.findOne(id);
   }
 
   async remove(id: number): Promise<void> {

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { GoogleStrategy } from './strategies/google.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from '../users/users.model';
-import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
-  imports: [GoogleStrategy],
+  imports: [GoogleStrategy, TypeOrmModule.forFeature([Users])],
   controllers: [AuthController],
   providers: [AuthService]
 })

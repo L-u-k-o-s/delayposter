@@ -9,16 +9,30 @@ export class Users {
   id: number;
 
   @ApiProperty()
-  @Column()
+  @Column({ nullable: true })
   first_name: string;
 
   @ApiProperty()
-  @Column()
+  @Column({ nullable: true })
   last_name: string;
 
   @ApiProperty()
   @Column()
   email: string;
+
+  @ApiProperty()
+  @Column({ default: 'NOW()', type: 'timestamp with time zone' })
+  created_at: Date;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  img: string;
+
+  @Column()
+  provider: string;
+
+  @Column()
+  provider_id: string;
 
   @ApiProperty()
   @Column({ default: true })
