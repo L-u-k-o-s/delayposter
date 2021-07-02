@@ -7,10 +7,17 @@ type Users {
   first_name: String!
   last_name: String!
   email: String!
+  created_at: DateTime!
+  img: String!
+  provider: String!
+  provider_id: String!
   is_active: Boolean!
-  password: String!
-  username: String!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Users1 {
   access_token: String!
@@ -25,7 +32,7 @@ type Query {
 type Mutation {
   addUser(newUsersData: NewUsersInput!): Users!
   removeUser(id: Float!): Boolean!
-  login(sub: Float!, username: String!): Users1!
+  login(sub: Float!, email: String!): Users1!
 }
 
 input NewUsersInput {

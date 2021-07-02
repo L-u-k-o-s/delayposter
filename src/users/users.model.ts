@@ -11,36 +11,40 @@ export class Users {
   id: number;
 
   @ApiProperty()
-  @Column()
   @Field()
+  @Column({ nullable: true })
   first_name: string;
 
   @ApiProperty()
-  @Column()
   @Field()
+  @Column({ nullable: true })
   last_name: string;
 
   @ApiProperty()
-  @Column()
   @Field()
+  @Column()
   email: string;
 
   @ApiProperty()
-  @Column({ default: true })
   @Field()
+  @Column({ default: 'NOW()', type: 'timestamp with time zone' })
+  created_at: Date;
+
+  @ApiProperty()
+  @Field()
+  @Column({ nullable: true })
+  img: string;
+
+  @Column({ nullable: true })
+  @Field()
+  provider: string;
+
+  @Column({ nullable: true })
+  @Field()
+  provider_id: string;
+
+  @ApiProperty()
+  @Field()
+  @Column({ default: true, nullable: true })
   is_active: boolean;
-
-  @ApiProperty()
-  @Column({
-    nullable: true,
-  })
-  @Field()
-  password: string;
-
-  @ApiProperty()
-  @Column({
-    nullable: true,
-  })
-  @Field()
-  username: string;
 }
